@@ -1,0 +1,10 @@
+﻿  Game.cpp
+  Gameplay.cpp
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Game.h(15,30): warning C4305:  'initializing': truncation from 'double' to 'float'
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(20,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(21,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(99,23): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+  Resource.cpp
+  Generating Code...
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(100,23): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+  GAME_SNAKE.vcxproj -> D:\GAME BY SFML\GAME_SNAKE\Debug\GAME_SNAKE.exe
