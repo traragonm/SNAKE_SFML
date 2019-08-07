@@ -33,32 +33,59 @@ void Game::Init() {
 	_Res->_Image.LoadTexture("res/image/apple.png", "apple");
 	_Res->_Image.LoadTexture("res/image/H.png", "Horizontal");
 	_Res->_Image.LoadTexture("res/image/V.png", "Vertical");
-	_Res->_StateM.AddState(std::make_unique<Intro>(_Res));
+	_Res->_Image.LoadTexture("res/image/Credit.png", "Credit");
+	_Res->_Image.LoadTexture("res/image/Play.png", "Play");
+	_Res->_Image.LoadTexture("res/image/Exit.png", "Exit");
+	_Res->_Image.LoadTexture("res/image/Mainmenu.jpg", "Menuback");
+	
 	_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
+	_Res->_StateM.AddState(std::make_unique<Menu>(_Res));
+	_Res->_StateM.AddState(std::make_unique<Intro>(_Res));
 	
 	Run();
 }
 void Game::Run() {
 	while (_Res->_window.isOpen()) {
 		sf::Event event;
-		
-		while (_Res->_window.pollEvent(event)) {
-			switch (event.type)
+		if (_Res->_StateM.GetCurrState()->signal == 0) {
+			while (_Res->_window.pollEvent(event)) {
+				switch (event.type)
+				{
+				case sf::Event::Closed:
+					_Res->_window.close();
+					break;
+				case sf::Event::KeyReleased:
+					if (event.key.code == sf::Keyboard::Escape) _Res->_StateM.RemoveState();
+					else _Res->_StateM.GetCurrState()->Handle(event);
+					break;
+				case sf::Event::MouseButtonPressed:
+					_Res->_StateM.GetCurrState()->Handle(event);
+					break;
+				default:
+					break;
+				}
+			}
+
+			_Res->_StateM.GetCurrState()->Update();
+			_Res->_StateM.GetCurrState()->Draw();
+		}
+		else {
+			switch (_Res->_StateM.GetCurrState()->signal)
 			{
-			case sf::Event::Closed:
+			case -1:
 				_Res->_window.close();
+			case 2:
 				break;
-			case sf::Event::KeyReleased:
-				if (event.key.code == sf::Keyboard::Escape) _Res->_StateM.RemoveState();
-				else _Res->_StateM.GetCurrState()->Handle(event);
+			case 3:
+				_Res->_StateM.GetCurrState()->signal = 0;
+				_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
+				break;
+			case 4:
 				break;
 			default:
 				break;
 			}
 		}
-
-		_Res->_StateM.GetCurrState()->Update();
-		_Res->_StateM.GetCurrState()->Draw();
 		
 		
 	}

@@ -1,25 +1,23 @@
-#include "Intro.h"
-Intro::Intro(GResource res) {
+#include "Credit.h"
+Credit::Credit(GResource res) {
 	_SRES = res;
 	Init();
-	Codename = 1;
+	Codename = 4;
 	signal = 0;
-	std::cout << "Intro init" << std::endl;
+	std::cout << "Credit init" << std::endl;
 }
-Intro::~Intro() {
-	std::cout << "Intro remove" << std::endl;
+Credit::~Credit() {
+	std::cout << "Credit remove" << std::endl;
 }
-void Intro::Init() {
-	
-	this->_Backgound.setTexture(_SRES->_Image.GetTexture("splash"));
+void Credit::Init() {
+
 }
-void Intro::Draw() {
+void Credit::Draw() {
 	_SRES->_window.clear(sf::Color::White);
-	_SRES->_window.draw(this->_Backgound);
 	_SRES->_window.display();
 }
 
-void Intro::Handle(sf::Event event) {
+void Credit::Handle(sf::Event event) {
 	while (_SRES->_window.pollEvent(event)) {
 		switch (event.type)
 		{
@@ -35,6 +33,6 @@ void Intro::Handle(sf::Event event) {
 	}
 }
 
-void Intro::Update() {
+void Credit::Update() {
 
 }

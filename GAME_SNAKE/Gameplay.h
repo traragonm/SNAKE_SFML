@@ -32,7 +32,11 @@ private:
 	sf::Sprite _SnakeTrunkLD;
 	sf::Sprite _SnakeTrunkRU;
 	sf::Sprite _SnakeTrunkRD;
+	sf::Sprite _Score;
 	void restart();
+	int Dir;
+	int DirX;
+	int DirY;
 	int length;
 };
 

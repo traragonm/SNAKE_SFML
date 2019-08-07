@@ -3,6 +3,8 @@
 Gameplay::Gameplay(GResource res) {
 	_SRES = res;
 	Init();
+	Codename = 3;
+	signal = 0;
 	std::cout << "Gameplay_init" << std::endl;
 }
 Gameplay::~Gameplay() {
@@ -11,17 +13,20 @@ Gameplay::~Gameplay() {
 	std::cout << "Gameplay_remove" << std::endl;
 }
 void Gameplay::Init() {
-	_Snake = new SnakeT[60];
+	_Snake = new SnakeT[85];
 	_Apple = new Fruit();
-	length = 6;
-	_Snake[0]._X = 5;
-	_Snake[0]._Y = 5;
-	_Snake[0]._Dir = 1;
-	for (int i = 1; i < length;i++) {
+	length = 3;
+	//_Snake[0]._X = 5;
+	//_Snake[0]._Y = 5;
+	//_Snake[0]._Dir = 1;
+	Dir = 1;
+	DirX = 5;
+	DirY = 12;
+	for (int i = 0; i < length;i++) {
 		_Snake[i]._Dir = 1;
 	}
-	_Apple->_X = rand() % 16;
-	_Apple->_Y = rand() % 20;
+	_Apple->_X = rand() % 17;
+	_Apple->_Y = rand() % 21;
 	_SnakeHead.setTexture(_SRES->_Image.GetTexture("Headup"));
 	_SnakeHead.setScale(0.5, 0.5);
 	_SnakeHeadD.setTexture(_SRES->_Image.GetTexture("Headdown"));
@@ -54,23 +59,24 @@ void Gameplay::Init() {
 	_SnakeTrunkRU.setScale(0.5, 0.5);
 }
 void Gameplay::restart() {
-	delete[]_Snake;
-	delete _Apple;
 	_Snake = new SnakeT[60];
 	_Apple = new Fruit();
-	length = 6;
-	_Snake[0]._X = 5;
-	_Snake[0]._Y = 5;
-	_Snake[0]._Dir = 1;
-	for (int i = 1; i < length; i++) {
+	length = 3;
+	//_Snake[0]._X = 5;
+	//_Snake[0]._Y = 5;
+	//_Snake[0]._Dir = 1;
+	Dir = 1;
+	DirX = 5;
+	DirY = 12;
+	for (int i = 0; i < length; i++) {
 		_Snake[i]._Dir = 1;
 	}
-	_Apple->_X = rand() % 16;
-	_Apple->_Y = rand() % 20;
+	_Apple->_X = rand() % 17;
+	_Apple->_Y = rand() % 21;
 }
 void Gameplay::Draw() {
 	_SRES->_window.clear(sf::Color::White);
-	switch (_Snake[0]._Dir) {
+	switch (Dir) {
 	case 1:
 		_SnakeHead.setPosition(_Snake[0]._X*32,_Snake[0]._Y*32);
 		_SRES->_window.draw(_SnakeHead);
@@ -88,7 +94,7 @@ void Gameplay::Draw() {
 		_SRES->_window.draw(_SnakeHeadD);
 		break;
 	}
-	for (int i = length - 2; i > 1; i-- ) {
+	for (int i = length - 2; i > 0; i-- ) {
 		
 		switch (_Snake[i]._Dir)
 		{
@@ -213,16 +219,25 @@ void Gameplay::Handle(sf::Event event) {
 	switch (event.key.code)
 	{
 	case sf::Keyboard::Left:
-		_Snake[0]._Dir = 2;
+		if (Dir == 3) {
+
+		}
+		else Dir = 2;
 		break;
 	case sf::Keyboard::Right:
-		_Snake[0]._Dir = 3;
+		if (Dir == 2) {
+
+		}else Dir = 3;
 		break;
 	case sf::Keyboard::Up:
-		_Snake[0]._Dir = 1;
+		if (Dir == 4) {
+
+		}else Dir = 1;
 		break;
 	case sf::Keyboard::Down:
-		_Snake[0]._Dir = 4;
+		if (Dir == 1) {
+
+		}else Dir = 4;
 		break;
 	default:
 		break;
@@ -231,41 +246,49 @@ void Gameplay::Handle(sf::Event event) {
 
 void Gameplay::Update() {
 	
-	switch (_Snake[0]._Dir)
+	switch (Dir)
 	{
 	case 1:
-		_Snake[0]._Y -= 1;
+		DirY -= 1;
 		break;
 	case 2:
-		_Snake[0]._X -= 1;
+		DirX -= 1;
 		break;
 	case 3:
-		_Snake[0]._X += 1;
+		DirX += 1;
 		break;
 	case 4:
-		_Snake[0]._Y += 1;
+		DirY += 1;
 		break;
 	default:
 		break;
 	}
-	for (int i = length - 1; i > 0; i--) {
-		_Snake[i]._X = _Snake[i - 1]._X;
-		_Snake[i]._Y = _Snake[i - 1]._Y;
-		_Snake[i]._Dir = _Snake[i - 1]._Dir;
+	for (int i = length - 1; i >= 0; i--) {
+		
+		if (i == 0) {
+			_Snake[i]._X =DirX;
+			_Snake[i]._Y = DirY;
+			_Snake[i]._Dir = Dir;
+		}
+		else {
+			_Snake[i]._X = _Snake[i - 1]._X;
+			_Snake[i]._Y = _Snake[i - 1]._Y;
+			_Snake[i]._Dir = _Snake[i - 1]._Dir;
+		}
 	}
 	
 	if ((_Snake[0]._X==_Apple->_X) && (_Snake[0]._Y== _Apple->_Y))
 	{
 		length++;
-		_Apple->_X = rand() % 16;
-		_Apple->_Y = rand() % 20;
+		_Apple->_X = rand() % 17;
+		_Apple->_Y = rand() % 21;
 	}
-	if (_Snake[0]._X> 15) _Snake[0]._X= 0;  if (_Snake[0]._X< 0) _Snake[0]._X= 16;
-	if (_Snake[0]._Y> 19) _Snake[0]._Y= 0;  if (_Snake[0]._Y< 0) _Snake[0]._Y= 20;
-	if (_Snake[1]._X > 15) _Snake[1]._X = 0;  if (_Snake[1]._X < 0) _Snake[1]._X = 16;
-	if (_Snake[1]._Y > 19) _Snake[1]._Y = 0;  if (_Snake[1]._Y < 0) _Snake[1]._Y = 20;
+	if (DirX >= 17) restart();//DirX= 0; 
+	if (DirX< 0) restart();//DirX= 16;
+	if (DirY>= 21) restart();//DirY= 0;  
+	if (DirY< 0) restart();//DirY= 20;
 	for (int i = 2; i < length; i++) {
-		if (_Snake[1]._X == _Snake[i]._X && _Snake[1]._Y == _Snake[i]._Y) {
+		if (_Snake[0]._X == _Snake[i]._X && _Snake[0]._Y == _Snake[i]._Y) {
 			restart();
 
 		}

@@ -129,10 +129,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Credit.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Fruit.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gameover.h" />
     <ClInclude Include="Gameplay.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="PNG.h" />
@@ -142,9 +145,12 @@
     <ClInclude Include="StateManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Credit.cpp" />
     <ClCompile Include="Fruit.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gameover.cpp" />
     <ClCompile Include="Gameplay.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />

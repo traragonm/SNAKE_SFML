@@ -1,25 +1,23 @@
-#include "Intro.h"
-Intro::Intro(GResource res) {
+#include "Gameover.h"
+Gameover::Gameover(GResource res) {
 	_SRES = res;
 	Init();
-	Codename = 1;
+	Codename = 5;
 	signal = 0;
-	std::cout << "Intro init" << std::endl;
+	std::cout << "Gameover init" << std::endl;
 }
-Intro::~Intro() {
-	std::cout << "Intro remove" << std::endl;
+Gameover::~Gameover() {
+	std::cout << "Gameover remove" << std::endl;
 }
-void Intro::Init() {
-	
-	this->_Backgound.setTexture(_SRES->_Image.GetTexture("splash"));
+void Gameover::Init() {
+
 }
-void Intro::Draw() {
+void Gameover::Draw() {
 	_SRES->_window.clear(sf::Color::White);
-	_SRES->_window.draw(this->_Backgound);
 	_SRES->_window.display();
 }
 
-void Intro::Handle(sf::Event event) {
+void Gameover::Handle(sf::Event event) {
 	while (_SRES->_window.pollEvent(event)) {
 		switch (event.type)
 		{
@@ -35,6 +33,7 @@ void Intro::Handle(sf::Event event) {
 	}
 }
 
-void Intro::Update() {
+void Gameover::Update() {
 
 }
+

@@ -6,3 +6,6 @@ State::State() {
 State::~State() {
 	std::cout << "State remove" << std::endl;
 }
+int State::getCode() {
+	return Codename;
+}
