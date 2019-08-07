@@ -21,9 +21,18 @@ private:
 	sf::Sprite _SnakeHeadD;
 	sf::Sprite _SnakeHeadL;
 	sf::Sprite _SnakeHeadR;
-	sf::Sprite _SnakeTrunk;
 	sf::Sprite _AppleD;
-	int dir;
+	sf::Sprite _SnakeTail;
+	sf::Sprite _SnakeTailD;
+	sf::Sprite _SnakeTailL;
+	sf::Sprite _SnakeTailR;
+	sf::Sprite _SnakeTrunkH;
+	sf::Sprite _SnakeTrunkV;
+	sf::Sprite _SnakeTrunkLU;
+	sf::Sprite _SnakeTrunkLD;
+	sf::Sprite _SnakeTrunkRU;
+	sf::Sprite _SnakeTrunkRD;
+	void restart();
 	int length;
 };
 

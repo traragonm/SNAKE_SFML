@@ -4,5 +4,5 @@ Fruit::Fruit() {
 	std::cout << "Fruit init" << std::endl;
 }
 Fruit::~Fruit() {
-	std::cout << "Fruit init" << std::endl;
+	std::cout << "Fruit remove" << std::endl;
 }

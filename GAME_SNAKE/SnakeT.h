@@ -5,4 +5,5 @@ struct SnakeT
 	~SnakeT();
 	float _X;
 	float _Y;
+	int _Dir;
 };

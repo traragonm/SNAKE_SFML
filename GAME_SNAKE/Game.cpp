@@ -22,8 +22,17 @@ void Game::Init() {
 	_Res->_Image.LoadTexture("res/image/Headdown.png", "Headdown");
 	_Res->_Image.LoadTexture("res/image/Headleft.png", "Headleft");
 	_Res->_Image.LoadTexture("res/image/Headright.png", "Headright");
-	_Res->_Image.LoadTexture("res/image/trunk.png", "Trunk");
+	_Res->_Image.LoadTexture("res/image/Tailup.png", "Tailup");
+	_Res->_Image.LoadTexture("res/image/Taildown.png", "Taildown");
+	_Res->_Image.LoadTexture("res/image/Tailleft.png", "Tailleft");
+	_Res->_Image.LoadTexture("res/image/Tailright.png", "Tailright");
+	_Res->_Image.LoadTexture("res/image/Leftup.png", "Leftup");
+	_Res->_Image.LoadTexture("res/image/Leftdown.png", "Leftdown");
+	_Res->_Image.LoadTexture("res/image/Rightup.png", "Rightup");
+	_Res->_Image.LoadTexture("res/image/Rightdown.png", "Rightdown");
 	_Res->_Image.LoadTexture("res/image/apple.png", "apple");
+	_Res->_Image.LoadTexture("res/image/H.png", "Horizontal");
+	_Res->_Image.LoadTexture("res/image/V.png", "Vertical");
 	_Res->_StateM.AddState(std::make_unique<Intro>(_Res));
 	_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
 	
@@ -32,6 +41,7 @@ void Game::Init() {
 void Game::Run() {
 	while (_Res->_window.isOpen()) {
 		sf::Event event;
+		
 		while (_Res->_window.pollEvent(event)) {
 			switch (event.type)
 			{
@@ -46,8 +56,10 @@ void Game::Run() {
 				break;
 			}
 		}
+
 		_Res->_StateM.GetCurrState()->Update();
 		_Res->_StateM.GetCurrState()->Draw();
+		
 		
 	}
 	
