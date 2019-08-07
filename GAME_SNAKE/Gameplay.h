@@ -13,6 +13,7 @@ public:
 	void Update();
 	void Handle(sf::Event event);
 	void Draw();
+	void restart();
 private:
 	GResource _SRES;
 	SnakeT* _Snake;
@@ -33,7 +34,7 @@ private:
 	sf::Sprite _SnakeTrunkRU;
 	sf::Sprite _SnakeTrunkRD;
 	sf::Sprite _Score;
-	void restart();
+	
 	int Dir;
 	int DirX;
 	int DirY;

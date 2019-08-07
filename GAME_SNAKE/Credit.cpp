@@ -10,7 +10,7 @@ Credit::~Credit() {
 	std::cout << "Credit remove" << std::endl;
 }
 void Credit::Init() {
-
+	_Background.setTexture(_SRES->_Image.GetTexture("Creditback"));
 }
 void Credit::Draw() {
 	_SRES->_window.clear(sf::Color::White);

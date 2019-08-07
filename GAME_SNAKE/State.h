@@ -9,6 +9,7 @@ public:
 	virtual void Handle(sf::Event event) = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+	virtual void restart();
 	int getCode();
 	int signal=0;
 protected:

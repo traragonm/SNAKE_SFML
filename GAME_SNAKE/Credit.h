@@ -4,6 +4,7 @@
 class Credit :
 	public State
 {
+public:
 	Credit(GResource res);
 	~Credit();
 	void Init();
@@ -12,5 +13,6 @@ class Credit :
 	void Draw();
 private:
 	GResource _SRES;
+	sf::Sprite _Background;
 };
 

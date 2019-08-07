@@ -9,3 +9,6 @@ State::~State() {
 int State::getCode() {
 	return Codename;
 }
+void State::restart() {
+
+}

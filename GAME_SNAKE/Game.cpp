@@ -3,6 +3,8 @@
 #include"Intro.h"
 #include"Menu.h"
 #include"define.h"
+#include"Gameover.h"
+#include"Credit.h"
 Game::Game() {
 	int HEIGHT = 32 * HEIGHT_SIZE_BY_PIXELS;
 	int WIDTH = 32 * WIDTH_SIZE_BY_PIXELS;
@@ -36,9 +38,12 @@ void Game::Init() {
 	_Res->_Image.LoadTexture("res/image/Credit.png", "Credit");
 	_Res->_Image.LoadTexture("res/image/Play.png", "Play");
 	_Res->_Image.LoadTexture("res/image/Exit.png", "Exit");
+	_Res->_Image.LoadTexture("res/image/YES.png", "YES");
+	_Res->_Image.LoadTexture("res/image/NO.png", "NO");
+	_Res->_Image.LoadTexture("res/image/Creditback.png", "Creditback");
+	_Res->_Image.LoadTexture("res/image/Gameover.png", "Gameover");
 	_Res->_Image.LoadTexture("res/image/Mainmenu.jpg", "Menuback");
 	
-	_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
 	_Res->_StateM.AddState(std::make_unique<Menu>(_Res));
 	_Res->_StateM.AddState(std::make_unique<Intro>(_Res));
 	
@@ -81,6 +86,18 @@ void Game::Run() {
 				_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
 				break;
 			case 4:
+				break;
+			case 5:
+				_Res->_StateM.GetCurrState()->signal = 0;
+				_Res->_StateM.AddState(std::make_unique<Gameover>(_Res));
+				break;
+			case 33:
+				_Res->_StateM.RemoveState();
+				_Res->_StateM.GetCurrState()->restart();
+				break;
+			case 22:
+				_Res->_StateM.RemoveState();
+				_Res->_StateM.RemoveState();
 				break;
 			default:
 				break;

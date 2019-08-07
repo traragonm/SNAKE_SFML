@@ -283,13 +283,13 @@ void Gameplay::Update() {
 		_Apple->_X = rand() % 17;
 		_Apple->_Y = rand() % 21;
 	}
-	if (DirX >= 17) restart();//DirX= 0; 
-	if (DirX< 0) restart();//DirX= 16;
-	if (DirY>= 21) restart();//DirY= 0;  
-	if (DirY< 0) restart();//DirY= 20;
+	if (DirX >= 17) signal=5;//DirX= 0; 
+	if (DirX< 0) signal = 5;//DirX= 16;
+	if (DirY>= 21) signal = 5;//DirY= 0;  
+	if (DirY< 0) signal = 5;//DirY= 20;
 	for (int i = 2; i < length; i++) {
 		if (_Snake[0]._X == _Snake[i]._X && _Snake[0]._Y == _Snake[i]._Y) {
-			restart();
+			signal = 5;
 
 		}
 	}
