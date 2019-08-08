@@ -34,7 +34,7 @@ private:
 	sf::Sprite _SnakeTrunkLD;
 	sf::Sprite _SnakeTrunkRU;
 	sf::Sprite _SnakeTrunkRD;
-	sf::Sprite _Score;
+	sf::Text _Score;
 	sf::Sound _Bite;
 	int Dir;
 	int DirX;

@@ -1,5 +1,6 @@
 #include "Gameplay.h"
 #include<iostream>
+
 Gameplay::Gameplay(GResource res) {
 	_SRES = res;
 	Init();
@@ -59,6 +60,9 @@ void Gameplay::Init() {
 	_SnakeTrunkRU.setScale(0.5, 0.5);
 	_Bite.setBuffer(_SRES->_Image.GetSoundBuffer("applebite"));
 	_Bite.setVolume(40);
+	_Score.setFont(_SRES->_Image.GetFont("arial"));
+	_Score.setCharacterSize(25);
+	_Score.setFillColor(sf::Color::Black);
 }
 void Gameplay::restart() {
 	_Snake = new SnakeT[85];
@@ -79,6 +83,7 @@ void Gameplay::restart() {
 }
 void Gameplay::Draw() {
 	_SRES->_window.clear(sf::Color::White);
+	_SRES->_window.draw(_Score);
 	switch (Dir) {
 	case 1:
 		_SnakeHead.setPosition(_Snake[0]._X*32,_Snake[0]._Y*32);
@@ -272,6 +277,8 @@ void Gameplay::Update() {
 		_Apple->_X = rand() % 17;
 		_Apple->_Y = rand() % 21;
 	}
+	_Score.setString("Score: " + std::to_string((length - 3) * 5)+" press ESC to go main menu");
+	value = length - 3;
 	if (DirX >= 17) signal=5;//DirX= 0; 
 	if (DirX< 0) signal = 5;//DirX= 16;
 	if (DirY>= 21) signal = 5;//DirY= 0;  
@@ -282,6 +289,6 @@ void Gameplay::Update() {
 
 		}
 	}
+	
 		
 }
-

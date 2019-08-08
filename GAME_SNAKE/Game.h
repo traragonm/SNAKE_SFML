@@ -14,5 +14,6 @@ private:
 	void Run();
 	sf::Clock _Clock;
 	sf::Sound _Themesong;
+	int score;
 };
 

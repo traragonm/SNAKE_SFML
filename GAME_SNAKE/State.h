@@ -10,6 +10,7 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 	virtual void restart();
+	int value = 0;
 	int getCode();
 	int signal=0;
 protected:

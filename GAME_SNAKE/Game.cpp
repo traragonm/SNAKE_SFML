@@ -5,6 +5,7 @@
 #include"define.h"
 #include"Gameover.h"
 #include"Credit.h"
+#include"SFML/System.hpp"
 Game::Game() {
 	int HEIGHT = 32 * HEIGHT_SIZE_BY_PIXELS;
 	int WIDTH = 32 * WIDTH_SIZE_BY_PIXELS;
@@ -46,6 +47,7 @@ void Game::Init() {
 	_Res->_Image.LoadTexture("res/image/Mainmenu.jpg", "Menuback");
 	_Res->_Image.LoadSoundBuffer("res/audio/bite.ogg", "applebite");
 	_Res->_Image.LoadSoundBuffer("res/audio/demo.ogg", "theme");
+	_Res->_Image.LoadFont("res/font/arial.ttf", "arial");
 	//_Res->_Image.LoadSoundBuffer("res/audio/Gameover.wav", "over");
 	
 	_Themesong.setBuffer(_Res->_Image.GetSoundBuffer("theme"));
@@ -59,6 +61,7 @@ void Game::Init() {
 }
 void Game::Run() {
 	while (_Res->_window.isOpen()) {
+		score = _Res->_StateM.GetCurrState()->value;
 		sf::Event event;
 		if (_Res->_StateM.GetCurrState()->signal == 0) {
 			while (_Res->_window.pollEvent(event)) {
@@ -68,7 +71,16 @@ void Game::Run() {
 					_Res->_window.close();
 					break;
 				case sf::Event::KeyReleased:
-					if (event.key.code == sf::Keyboard::Escape) _Res->_StateM.RemoveState();
+					if (event.key.code == sf::Keyboard::Escape&&_Res->_StateM.GetCurrState()->getCode()!=5) _Res->_StateM.RemoveState();
+					else if (event.key.code == sf::Keyboard::F1) {
+						if (_Themesong.getStatus()== sf::Sound::Status::Playing) {
+							_Themesong.stop();
+						}
+						else
+						{
+							_Themesong.play();
+						}
+					}
 					else _Res->_StateM.GetCurrState()->Handle(event);
 					break;
 				case sf::Event::MouseButtonPressed:
@@ -78,7 +90,7 @@ void Game::Run() {
 					break;
 				}
 			}
-
+			
 			_Res->_StateM.GetCurrState()->Update();
 			_Res->_StateM.GetCurrState()->Draw();
 		}
@@ -98,7 +110,8 @@ void Game::Run() {
 				break;
 			case 5:
 				_Res->_StateM.GetCurrState()->signal = 0;
-				_Res->_StateM.AddState(std::make_unique<Gameover>(_Res));
+				
+				_Res->_StateM.AddState(std::make_unique<Gameover>(_Res,score));
 				break;
 			case 33:
 				_Res->_StateM.RemoveState();

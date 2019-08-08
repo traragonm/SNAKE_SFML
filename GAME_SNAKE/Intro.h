@@ -15,6 +15,6 @@ private:
 	GResource _SRES;
 	sf::Sprite _Backgound;
 	sf::Clock _Clock;
-	float _Delay = 5;
+	float _Delay = 1;
 };
 
