@@ -1,5 +1,6 @@
 #pragma once
 #include"Resource.h"
+#include"SFML/Audio.hpp"
 #include"State.h"
 #include<stack>
 #include<iostream>
@@ -12,6 +13,6 @@ private:
 	void Init();
 	void Run();
 	sf::Clock _Clock;
-	float timer = 0, delay = 0.1;
+	sf::Sound _Themesong;
 };
 

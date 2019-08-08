@@ -16,6 +16,7 @@ Game::~Game() {
 	_Res->_StateM.ClearStack();
 	_Res->_Image.ClearFonts();
 	_Res->_Image.ClearTextures();
+	_Res->_Image.ClearSoundBuffer();
 	std::cout << "Game remove" << std::endl;
 }
 void Game::Init() {
@@ -43,10 +44,17 @@ void Game::Init() {
 	_Res->_Image.LoadTexture("res/image/Creditback.png", "Creditback");
 	_Res->_Image.LoadTexture("res/image/Gameover.png", "Gameover");
 	_Res->_Image.LoadTexture("res/image/Mainmenu.jpg", "Menuback");
+	_Res->_Image.LoadSoundBuffer("res/audio/bite.ogg", "applebite");
+	_Res->_Image.LoadSoundBuffer("res/audio/demo.ogg", "theme");
+	//_Res->_Image.LoadSoundBuffer("res/audio/Gameover.wav", "over");
+	
+	_Themesong.setBuffer(_Res->_Image.GetSoundBuffer("theme"));
+	_Themesong.setLoop(true);
+	_Themesong.setVolume(15);
+	_Themesong.play();
 	
 	_Res->_StateM.AddState(std::make_unique<Menu>(_Res));
 	_Res->_StateM.AddState(std::make_unique<Intro>(_Res));
-	
 	Run();
 }
 void Game::Run() {
@@ -93,7 +101,8 @@ void Game::Run() {
 				break;
 			case 33:
 				_Res->_StateM.RemoveState();
-				_Res->_StateM.GetCurrState()->restart();
+				_Res->_StateM.RemoveState();
+				_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
 				break;
 			case 22:
 				_Res->_StateM.RemoveState();

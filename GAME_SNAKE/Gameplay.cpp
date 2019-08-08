@@ -57,9 +57,11 @@ void Gameplay::Init() {
 	_SnakeTrunkRD.setScale(0.5, 0.5);
 	_SnakeTrunkRU.setTexture(_SRES->_Image.GetTexture("Rightup"));
 	_SnakeTrunkRU.setScale(0.5, 0.5);
+	_Bite.setBuffer(_SRES->_Image.GetSoundBuffer("applebite"));
+	_Bite.setVolume(40);
 }
 void Gameplay::restart() {
-	_Snake = new SnakeT[60];
+	_Snake = new SnakeT[85];
 	_Apple = new Fruit();
 	length = 3;
 	//_Snake[0]._X = 5;
@@ -113,8 +115,6 @@ void Gameplay::Draw() {
 				_SnakeTrunkRD.setPosition(_Snake[i]._X * 32, _Snake[i]._Y * 32);
 				_SRES->_window.draw(_SnakeTrunkRD);
 				break;
-			case 4:
-				break;
 			default:
 				break;
 			}
@@ -147,8 +147,6 @@ void Gameplay::Draw() {
 				_SnakeTrunkLU.setPosition(_Snake[i]._X * 32, _Snake[i]._Y * 32);
 				_SRES->_window.draw(_SnakeTrunkLU);
 				break;
-			case 2:
-				break;
 			case 3:
 				_SnakeTrunkH.setPosition(_Snake[i]._X * 32, _Snake[i]._Y * 32);
 				_SRES->_window.draw(_SnakeTrunkH);
@@ -157,16 +155,11 @@ void Gameplay::Draw() {
 				_SnakeTrunkLD.setPosition(_Snake[i]._X * 32, _Snake[i]._Y * 32);
 				_SRES->_window.draw(_SnakeTrunkLD);
 				break;
-			default:
-				break;
 			}
 			break;
 		case 4:
 			switch (_Snake[i - 1]._Dir)
 			{
-			case 1:
-				
-				break;
 			case 2:
 				_SnakeTrunkLU.setPosition(_Snake[i]._X * 32, _Snake[i]._Y * 32);
 				_SRES->_window.draw(_SnakeTrunkLU);
@@ -179,11 +172,7 @@ void Gameplay::Draw() {
 				_SnakeTrunkV.setPosition(_Snake[i]._X * 32, _Snake[i]._Y * 32);
 				_SRES->_window.draw(_SnakeTrunkV);
 				break;
-			default:
-				break;
 			}
-			break;
-		default:
 			break;
 		}
 		
@@ -205,8 +194,6 @@ void Gameplay::Draw() {
 	case 4:
 		_SnakeTailD.setPosition(_Snake[length - 1]._X * 32, _Snake[length - 1]._Y * 32);
 		_SRES->_window.draw(_SnakeTailD);
-		break;
-	default:
 		break;
 	}
 
@@ -279,6 +266,7 @@ void Gameplay::Update() {
 	
 	if ((_Snake[0]._X==_Apple->_X) && (_Snake[0]._Y== _Apple->_Y))
 	{
+		_Bite.play();
 		length++;
 		_Apple->_X = rand() % 17;
 		_Apple->_Y = rand() % 21;

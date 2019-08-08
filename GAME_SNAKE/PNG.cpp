@@ -38,3 +38,19 @@ sf::Texture& PNG::GetTexture(std::string name) {
 sf::Font& PNG::GetFont(std::string name) {
 	return this->_Fonts.at(name);
 }
+void PNG::LoadSoundBuffer(std::string path, std::string name) {
+	sf::SoundBuffer s;
+	if (s.loadFromFile(path)) {
+		this->_Sounds[name] = s;
+	}
+	else std::cout << "Sound buffer loading error" << std::endl;
+}
+void PNG::ClearSoundBuffer() {
+	if (!_Sounds.empty()) {
+		_Sounds.clear();
+	}
+	std::cout << "Sounds is empty" << std::endl;
+}
+sf::SoundBuffer& PNG::GetSoundBuffer(std::string name) {
+	return this->_Sounds.at(name);
+}

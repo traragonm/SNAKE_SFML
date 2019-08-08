@@ -10,16 +10,13 @@ Gameover::~Gameover() {
 	std::cout << "Gameover remove" << std::endl;
 }
 void Gameover::Init() {
-	_Background.setTexture(_SRES->_Image.GetTexture("Gameover"));
-	_Background.setPosition(2 * 32, 4 * 32);
 	_YES.setTexture(_SRES->_Image.GetTexture("YES"));
-	_YES.setPosition(2 * 32, 11 * 32);
+	_YES.setPosition(2 * 32, 14 * 32);
 	_NO.setTexture(_SRES->_Image.GetTexture("NO"));
-	_NO.setPosition(10 * 32, 11 * 32);
+	_NO.setPosition(10 * 32, 14 * 32);
 }
 void Gameover::Draw() {
 	_SRES->_window.clear(sf::Color::White);
-	_SRES->_window.draw(_Background);
 	_SRES->_window.draw(_YES);
 	_SRES->_window.draw(_NO);
 	_SRES->_window.display();

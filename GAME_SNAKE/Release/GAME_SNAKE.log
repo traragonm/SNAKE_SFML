@@ -1,24 +1,7 @@
-﻿  Fruit.cpp
-  Game.cpp
-  Gameplay.cpp
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Game.h(15,30): warning C4305:  'initializing': truncation from 'double' to 'float'
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(23,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(24,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(68,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(69,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(260,23): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-  Intro.cpp
-  Menu.cpp
-  Resource.cpp
-  SnakeT.cpp
-  State.cpp
-  StateManager.cpp
-  main.cpp
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(261,23): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Game.h(15,30): warning C4305:  'initializing': truncation from 'double' to 'float'
+﻿  Game.cpp
   Generating code
-  58 of 423 functions (13.7%) were compiled, the rest were copied from previous compilation.
-    25 functions were new in current compilation
-    25 functions had inline decision re-evaluated but remain unchanged
+  1 of 551 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GAME_SNAKE.vcxproj -> D:\GAME BY SFML\GAME_SNAKE\Release\GAME_SNAKE.exe

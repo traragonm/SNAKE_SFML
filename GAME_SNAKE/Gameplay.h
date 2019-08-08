@@ -3,6 +3,7 @@
 #include"Resource.h"
 #include"SnakeT.h"
 #include"Fruit.h"
+#include"SFML/Audio.hpp"
 class Gameplay :
 	public State
 {
@@ -34,7 +35,7 @@ private:
 	sf::Sprite _SnakeTrunkRU;
 	sf::Sprite _SnakeTrunkRD;
 	sf::Sprite _Score;
-	
+	sf::Sound _Bite;
 	int Dir;
 	int DirX;
 	int DirY;
