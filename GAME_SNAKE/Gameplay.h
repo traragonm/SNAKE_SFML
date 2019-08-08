@@ -14,7 +14,7 @@ public:
 	void Update();
 	void Handle(sf::Event event);
 	void Draw();
-	void restart();
+	
 private:
 	GResource _SRES;
 	SnakeT* _Snake;
@@ -34,11 +34,24 @@ private:
 	sf::Sprite _SnakeTrunkLD;
 	sf::Sprite _SnakeTrunkRU;
 	sf::Sprite _SnakeTrunkRD;
+	sf::Sprite _Replay;
+	sf::Sprite _OverFrame;
+	sf::Sprite _Back;
+	sf::Sprite _Gameover;
 	sf::Text _Score;
 	sf::Sound _Bite;
+	sf::Sound _Hit;
 	int Dir;
 	int DirX;
 	int DirY;
 	int length;
+	bool IsPlay = true;
+	void DrawGame();
+	void DrawOver();
+	void UpdateGame();
+	void UpdateOver();
+	void HandleGame(sf::Event event);
+	void HandleOver(sf::Event event);
+	void restart();
 };
 

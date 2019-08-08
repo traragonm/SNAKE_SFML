@@ -3,7 +3,6 @@
 #include"Intro.h"
 #include"Menu.h"
 #include"define.h"
-#include"Gameover.h"
 #include"Credit.h"
 #include"SFML/System.hpp"
 Game::Game() {
@@ -40,15 +39,16 @@ void Game::Init() {
 	_Res->_Image.LoadTexture("res/image/Credit.png", "Credit");
 	_Res->_Image.LoadTexture("res/image/Play.png", "Play");
 	_Res->_Image.LoadTexture("res/image/Exit.png", "Exit");
-	_Res->_Image.LoadTexture("res/image/YES.png", "YES");
-	_Res->_Image.LoadTexture("res/image/NO.png", "NO");
+	_Res->_Image.LoadTexture("res/image/Replay.png", "Replay");
+	_Res->_Image.LoadTexture("res/image/Back.png", "Back");
 	_Res->_Image.LoadTexture("res/image/Creditback.png", "Creditback");
-	_Res->_Image.LoadTexture("res/image/Gameover.png", "Gameover");
+	_Res->_Image.LoadTexture("res/image/Gameover.jpg", "Gameover");
 	_Res->_Image.LoadTexture("res/image/Mainmenu.jpg", "Menuback");
+	_Res->_Image.LoadTexture("res/image/Over.png", "Over");
 	_Res->_Image.LoadSoundBuffer("res/audio/bite.ogg", "applebite");
-	_Res->_Image.LoadSoundBuffer("res/audio/demo.ogg", "theme");
+	_Res->_Image.LoadSoundBuffer("res/audio/theme.ogg", "theme");
 	_Res->_Image.LoadFont("res/font/arial.ttf", "arial");
-	//_Res->_Image.LoadSoundBuffer("res/audio/Gameover.wav", "over");
+	_Res->_Image.LoadSoundBuffer("res/audio/gameover.ogg", "oversound");
 	
 	_Themesong.setBuffer(_Res->_Image.GetSoundBuffer("theme"));
 	_Themesong.setLoop(true);
@@ -61,7 +61,6 @@ void Game::Init() {
 }
 void Game::Run() {
 	while (_Res->_window.isOpen()) {
-		score = _Res->_StateM.GetCurrState()->value;
 		sf::Event event;
 		if (_Res->_StateM.GetCurrState()->signal == 0) {
 			while (_Res->_window.pollEvent(event)) {
@@ -107,19 +106,6 @@ void Game::Run() {
 				_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
 				break;
 			case 4:
-				break;
-			case 5:
-				_Res->_StateM.GetCurrState()->signal = 0;
-				
-				_Res->_StateM.AddState(std::make_unique<Gameover>(_Res,score));
-				break;
-			case 33:
-				_Res->_StateM.RemoveState();
-				_Res->_StateM.GetCurrState()->restart();
-				break;
-			case 22:
-				_Res->_StateM.RemoveState();
-				_Res->_StateM.RemoveState();
 				break;
 			default:
 				break;

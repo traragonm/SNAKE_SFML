@@ -28,6 +28,14 @@ void Gameplay::Init() {
 	}
 	_Apple->_X = rand() % 17;
 	_Apple->_Y = rand() % 21;
+	_Replay.setTexture(_SRES->_Image.GetTexture("Replay"));
+	_Replay.setPosition(4.5 * 32, 11 * 32);
+	_OverFrame.setTexture(_SRES->_Image.GetTexture("Gameover"));
+	_OverFrame.setPosition(2*32,4*32);
+	_Gameover.setTexture(_SRES->_Image.GetTexture("Over"));
+	_Gameover.setPosition(7.5*32,5*32);
+	_Back.setTexture(_SRES->_Image.GetTexture("Back"));
+	_Back.setPosition(11 * 32, 11 * 32);
 	_SnakeHead.setTexture(_SRES->_Image.GetTexture("Headup"));
 	_SnakeHead.setScale(0.5, 0.5);
 	_SnakeHeadD.setTexture(_SRES->_Image.GetTexture("Headdown"));
@@ -59,15 +67,18 @@ void Gameplay::Init() {
 	_SnakeTrunkRU.setTexture(_SRES->_Image.GetTexture("Rightup"));
 	_SnakeTrunkRU.setScale(0.5, 0.5);
 	_Bite.setBuffer(_SRES->_Image.GetSoundBuffer("applebite"));
-	_Bite.setVolume(40);
+	_Bite.setVolume(60);
+	_Hit.setBuffer(_SRES->_Image.GetSoundBuffer("oversound"));
+	_Hit.setVolume(150);
 	_Score.setFont(_SRES->_Image.GetFont("arial"));
-	_Score.setCharacterSize(25);
-	_Score.setFillColor(sf::Color::Black);
+	_Score.setCharacterSize(50);
+	_Score.setFillColor(sf::Color::Red);
 }
 void Gameplay::restart() {
 	_Snake = new SnakeT[85];
 	_Apple = new Fruit();
 	length = 3;
+	IsPlay = true;
 	//_Snake[0]._X = 5;
 	//_Snake[0]._Y = 5;
 	//_Snake[0]._Dir = 1;
@@ -83,6 +94,26 @@ void Gameplay::restart() {
 }
 void Gameplay::Draw() {
 	_SRES->_window.clear(sf::Color::White);
+	if (IsPlay) {
+		_Score.setPosition(0, 0);
+		DrawGame();
+	}
+	else {
+		_Score.setPosition(5.6 * 32, 7 * 32);
+		DrawOver();
+	}
+	_SRES->_window.display();
+}
+void Gameplay::DrawOver() {
+	
+	_SRES->_window.draw(_OverFrame);
+	_SRES->_window.draw(_Gameover);
+	_SRES->_window.draw(_Replay);
+	_SRES->_window.draw(_Back);
+	_SRES->_window.draw(_Score);
+}
+void Gameplay::DrawGame() {
+	
 	_SRES->_window.draw(_Score);
 	switch (Dir) {
 	case 1:
@@ -205,10 +236,15 @@ void Gameplay::Draw() {
 
 	_AppleD.setPosition(_Apple->_X*32, _Apple->_Y*32);
 	_SRES->_window.draw(_AppleD);
-	_SRES->_window.display();
+	
 }
-
 void Gameplay::Handle(sf::Event event) {
+	if (IsPlay) {
+		this->HandleGame(event);
+	}
+	else this->HandleOver(event);
+}
+void Gameplay::HandleGame(sf::Event event) {
 	switch (event.key.code)
 	{
 	case sf::Keyboard::Left:
@@ -236,8 +272,16 @@ void Gameplay::Handle(sf::Event event) {
 		break;
 	}
 }
-
 void Gameplay::Update() {
+	if (IsPlay) {
+		this->UpdateGame();
+	}
+	else this->UpdateOver();
+}
+void Gameplay::UpdateOver() {
+	
+}
+void Gameplay::UpdateGame() {
 	
 	switch (Dir)
 	{
@@ -277,18 +321,46 @@ void Gameplay::Update() {
 		_Apple->_X = rand() % 17;
 		_Apple->_Y = rand() % 21;
 	}
-	_Score.setString("Score: " + std::to_string((length - 3) * 5)+" press ESC to go main menu");
+	_Score.setString("Score: " + std::to_string((length - 3) * 5));
 	value = length - 3;
-	if (DirX >= 17) signal=5;//DirX= 0; 
-	if (DirX< 0) signal = 5;//DirX= 16;
-	if (DirY>= 21) signal = 5;//DirY= 0;  
-	if (DirY< 0) signal = 5;//DirY= 20;
+	if (DirX >= 17) {
+		IsPlay = false;//DirX= 0; 
+		_Hit.play();
+	}
+	if (DirX < 0) {
+		IsPlay = false;//DirX= 16;
+		_Hit.play();
+	}
+	if (DirY >= 21) {
+		IsPlay = false;//DirY= 0;  
+		_Hit.play();
+	}
+	if (DirY < 0) {
+		IsPlay = false;//DirY= 20;
+		_Hit.play();
+	}
 	for (int i = 2; i < length; i++) {
 		if (_Snake[0]._X == _Snake[i]._X && _Snake[0]._Y == _Snake[i]._Y) {
-			signal = 5;
+			IsPlay = false;
+			_Hit.play();
 
 		}
 	}
 	
 		
+}
+void Gameplay::HandleOver(sf::Event event) {
+	switch (event.key.code)
+	{
+	case sf::Mouse::Left:
+		if (_SRES->_InputM.IsSpriteClicked(_Back, event.mouseButton.button, _SRES->_window)) {
+			signal = 2;
+		}
+		else if (_SRES->_InputM.IsSpriteClicked(_Replay, event.mouseButton.button, _SRES->_window)) {
+			this->restart();
+		}
+		break;
+	default:
+		break;
+	}
 }

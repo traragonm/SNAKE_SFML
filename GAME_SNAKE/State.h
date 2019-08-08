@@ -9,7 +9,6 @@ public:
 	virtual void Handle(sf::Event event) = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
-	virtual void restart();
 	int value = 0;
 	int getCode();
 	int signal=0;
