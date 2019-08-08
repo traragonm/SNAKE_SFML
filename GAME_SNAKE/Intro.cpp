@@ -10,7 +10,6 @@ Intro::~Intro() {
 	std::cout << "Intro remove" << std::endl;
 }
 void Intro::Init() {
-	
 	this->_Backgound.setTexture(_SRES->_Image.GetTexture("splash"));
 }
 void Intro::Draw() {
@@ -36,5 +35,7 @@ void Intro::Handle(sf::Event event) {
 }
 
 void Intro::Update() {
-
+	if (_Clock.getElapsedTime().asSeconds() > _Delay) {
+		signal = 2;
+	}
 }

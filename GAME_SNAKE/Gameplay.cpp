@@ -67,6 +67,7 @@ void Gameplay::restart() {
 	//_Snake[0]._X = 5;
 	//_Snake[0]._Y = 5;
 	//_Snake[0]._Dir = 1;
+	signal = 0;
 	Dir = 1;
 	DirX = 5;
 	DirY = 12;

@@ -88,6 +88,7 @@ void Game::Run() {
 			case -1:
 				_Res->_window.close();
 			case 2:
+				_Res->_StateM.RemoveState();
 				break;
 			case 3:
 				_Res->_StateM.GetCurrState()->signal = 0;
@@ -101,8 +102,7 @@ void Game::Run() {
 				break;
 			case 33:
 				_Res->_StateM.RemoveState();
-				_Res->_StateM.RemoveState();
-				_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
+				_Res->_StateM.GetCurrState()->restart();
 				break;
 			case 22:
 				_Res->_StateM.RemoveState();
