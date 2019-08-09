@@ -23,11 +23,16 @@ void Gameplay::Init() {
 	Dir = 1;
 	DirX = 5;
 	DirY = 12;
-	for (int i = 0; i < length;i++) {
+	_Snake[0]._Dir = 1;
+	_Snake[0]._X = 5;
+	_Snake[0]._Y = 12;
+	for (int i = 1; i < length; i++) {
 		_Snake[i]._Dir = 1;
+		_Snake[i]._X = _Snake[i - 1]._X;
+		_Snake[i]._Y = _Snake[i - 1]._Y + 1;
 	}
-	_Apple->_X = rand() % 17;
-	_Apple->_Y = rand() % 21;
+	_Apple->_X = rand() % 16;
+	_Apple->_Y = rand() % 20;
 	_Replay.setTexture(_SRES->_Image.GetTexture("Replay"));
 	_Replay.setPosition(4.5 * 32, 11 * 32);
 	_OverFrame.setTexture(_SRES->_Image.GetTexture("Gameover"));
@@ -75,8 +80,6 @@ void Gameplay::Init() {
 	_Score.setFillColor(sf::Color::Red);
 }
 void Gameplay::restart() {
-	_Snake = new SnakeT[85];
-	_Apple = new Fruit();
 	length = 3;
 	IsPlay = true;
 	//_Snake[0]._X = 5;
@@ -86,11 +89,16 @@ void Gameplay::restart() {
 	Dir = 1;
 	DirX = 5;
 	DirY = 12;
-	for (int i = 0; i < length; i++) {
+	_Snake[0]._Dir = 1;
+	_Snake[0]._X = 5;
+	_Snake[0]._Y = 12;
+	for (int i = 1; i < length; i++) {
 		_Snake[i]._Dir = 1;
+		_Snake[i]._X = _Snake[i - 1]._X;
+		_Snake[i]._Y = _Snake[i - 1]._Y + 1;
 	}
-	_Apple->_X = rand() % 17;
-	_Apple->_Y = rand() % 21;
+	_Apple->_X = rand() % 16;
+	_Apple->_Y = rand() % 20;
 }
 void Gameplay::Draw() {
 	_SRES->_window.clear(sf::Color::White);
@@ -251,22 +259,33 @@ void Gameplay::HandleGame(sf::Event event) {
 		if (Dir == 3) {
 
 		}
-		else Dir = 2;
+		else {
+			Dir = 2;
+		}
 		break;
 	case sf::Keyboard::Right:
 		if (Dir == 2) {
 
-		}else Dir = 3;
+		}
+		else {
+			Dir = 3;
+		}
 		break;
 	case sf::Keyboard::Up:
 		if (Dir == 4) {
 
-		}else Dir = 1;
+		}
+		else {
+			Dir = 1;
+		}
 		break;
 	case sf::Keyboard::Down:
 		if (Dir == 1) {
 
-		}else Dir = 4;
+		}
+		else {
+			Dir = 4;
+		}
 		break;
 	default:
 		break;
@@ -318,26 +337,57 @@ void Gameplay::UpdateGame() {
 	{
 		_Bite.play();
 		length++;
-		_Apple->_X = rand() % 17;
-		_Apple->_Y = rand() % 21;
+		switch (_Snake[length - 2]._Dir) {
+		case 1:
+			_Snake[length - 1]._X = _Snake[length - 2]._X;
+			_Snake[length - 1]._Y = _Snake[length - 2]._Y + 1;
+			_Snake[length - 1]._Dir = 1;
+			break;
+		case 2:
+			_Snake[length - 1]._X = _Snake[length - 2]._X + 1;
+			_Snake[length - 1]._Y = _Snake[length - 2]._Y;
+			_Snake[length - 1]._Dir = 2;
+			break;
+		case 3:
+			_Snake[length - 1]._X = _Snake[length - 2]._X - 1;
+			_Snake[length - 1]._Y = _Snake[length - 2]._Y;
+			_Snake[length - 1]._Dir = 3;
+			break;
+		case 4:
+			_Snake[length - 1]._X = _Snake[length - 2]._X;
+			_Snake[length - 1]._Y = _Snake[length - 2]._Y - 1;
+			_Snake[length - 1]._Dir = 4;
+			break;
+		}
+		_Apple->_X = rand() % 16;
+		_Apple->_Y = rand() % 20;
+		
 	}
 	_Score.setString("Score: " + std::to_string((length - 3) * 5));
 	value = length - 3;
-	if (DirX >= 17) {
-		IsPlay = false;//DirX= 0; 
-		_Hit.play();
+	if (DirX > 16) {
+		//IsPlay = false;//DirX= 0; 
+		//_Hit.play();
+		DirX = 0;
+		_Snake[0]._X = 0;
 	}
 	if (DirX < 0) {
-		IsPlay = false;//DirX= 16;
-		_Hit.play();
+		//IsPlay = false;//DirX= 16;
+		//_Hit.play();
+		DirX = 16;
+		_Snake[0]._X = 16;
 	}
-	if (DirY >= 21) {
-		IsPlay = false;//DirY= 0;  
-		_Hit.play();
+	if (DirY > 20) {
+		//IsPlay = false;//DirY= 0;  
+		//_Hit.play();
+		DirY = 0;
+		_Snake[0]._Y = 0;
 	}
 	if (DirY < 0) {
-		IsPlay = false;//DirY= 20;
-		_Hit.play();
+		//IsPlay = false;//DirY= 20;
+		//_Hit.play();
+		DirY = 20;
+		_Snake[0]._Y = 20;
 	}
 	for (int i = 2; i < length; i++) {
 		if (_Snake[0]._X == _Snake[i]._X && _Snake[0]._Y == _Snake[i]._Y) {
@@ -357,6 +407,7 @@ void Gameplay::HandleOver(sf::Event event) {
 			signal = 2;
 		}
 		else if (_SRES->_InputM.IsSpriteClicked(_Replay, event.mouseButton.button, _SRES->_window)) {
+			signal = 5;
 			this->restart();
 		}
 		break;

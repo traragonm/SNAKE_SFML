@@ -13,6 +13,7 @@ private:
 	void Init();
 	void Run();
 	sf::Clock _Clock;
+	float delay = 0.1;
 	sf::Sound _Themesong;
 };
 

@@ -90,8 +90,12 @@ void Game::Run() {
 				}
 			}
 			
-			_Res->_StateM.GetCurrState()->Update();
-			_Res->_StateM.GetCurrState()->Draw();
+			if (_Clock.getElapsedTime().asSeconds() > delay) {
+				_Res->_StateM.GetCurrState()->Update();
+				_Res->_StateM.GetCurrState()->Draw();
+				delay = delay - 0.000002;
+				_Clock.restart();
+			}
 		}
 		else {
 			switch (_Res->_StateM.GetCurrState()->signal)
@@ -99,13 +103,19 @@ void Game::Run() {
 			case -1:
 				_Res->_window.close();
 			case 2:
+				delay = 0.1;
 				_Res->_StateM.RemoveState();
 				break;
 			case 3:
 				_Res->_StateM.GetCurrState()->signal = 0;
+				delay = 0.1;
 				_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
 				break;
 			case 4:
+				break;
+			case 5:
+				_Res->_StateM.GetCurrState()->signal = 0;
+				delay = 0.1;
 				break;
 			default:
 				break;
