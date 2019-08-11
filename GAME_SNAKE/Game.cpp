@@ -41,7 +41,7 @@ void Game::Init() {
 	_Res->_Image.LoadTexture("res/image/Exit.png", "Exit");
 	_Res->_Image.LoadTexture("res/image/Replay.png", "Replay");
 	_Res->_Image.LoadTexture("res/image/Back.png", "Back");
-	_Res->_Image.LoadTexture("res/image/Creditback.png", "Creditback");
+	_Res->_Image.LoadTexture("res/image/C.png", "C");
 	_Res->_Image.LoadTexture("res/image/Gameover.jpg", "Gameover");
 	_Res->_Image.LoadTexture("res/image/Mainmenu.jpg", "Menuback");
 	_Res->_Image.LoadTexture("res/image/Over.png", "Over");
@@ -113,6 +113,9 @@ void Game::Run() {
 				_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
 				break;
 			case 4:
+				_Res->_StateM.GetCurrState()->signal = 0;
+				_Res->_StateM.AddState(std::make_unique<Credit>(_Res));
+				delay = 0.15;
 				break;
 			case 5:
 				_Res->_StateM.GetCurrState()->signal = 0;
