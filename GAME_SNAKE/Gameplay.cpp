@@ -14,7 +14,7 @@ Gameplay::~Gameplay() {
 	std::cout << "Gameplay_remove" << std::endl;
 }
 void Gameplay::Init() {
-	_Snake = new SnakeT[85];
+	_Snake = new SnakeT[250];
 	_Apple = new Fruit();
 	length = 3;
 	//_Snake[0]._X = 5;
@@ -71,6 +71,7 @@ void Gameplay::Init() {
 	_SnakeTrunkRD.setScale(0.5, 0.5);
 	_SnakeTrunkRU.setTexture(_SRES->_Image.GetTexture("Rightup"));
 	_SnakeTrunkRU.setScale(0.5, 0.5);
+	_Lawn.setTexture(_SRES->_Image.GetTexture("lawn"));
 	_Bite.setBuffer(_SRES->_Image.GetSoundBuffer("applebite"));
 	_Bite.setVolume(60);
 	_Hit.setBuffer(_SRES->_Image.GetSoundBuffer("oversound"));
@@ -121,7 +122,12 @@ void Gameplay::DrawOver() {
 	_SRES->_window.draw(_Score);
 }
 void Gameplay::DrawGame() {
-	
+	for (int i = 0; i < 17; i++) {
+		for (int j = 0; j < 21; j++) {
+			_Lawn.setPosition(i * 32, j * 32);
+			_SRES->_window.draw(_Lawn);
+		}
+	}
 	_SRES->_window.draw(_Score);
 	switch (Dir) {
 	case 1:
@@ -359,8 +365,11 @@ void Gameplay::UpdateGame() {
 			_Snake[length - 1]._Dir = 4;
 			break;
 		}
-		_Apple->_X = rand() % 16;
-		_Apple->_Y = rand() % 20;
+		while (check()) {
+			_Apple->_X = rand() % 16;
+			_Apple->_Y = rand() % 20;
+		}
+		
 		
 	}
 	_Score.setString("Score: " + std::to_string((length - 3) * 5));
@@ -414,4 +423,12 @@ void Gameplay::HandleOver(sf::Event event) {
 	default:
 		break;
 	}
+}
+bool Gameplay::check() {
+	for (int i = 0; i < length; i++) {
+		if (_Apple->_X == _Snake[i]._X && _Apple->_Y == _Snake[i]._Y) {
+			return true;
+		}
+	}
+	return false;
 }

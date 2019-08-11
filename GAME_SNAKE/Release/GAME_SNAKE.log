@@ -1,16 +1,18 @@
 ﻿  Gameplay.cpp
 D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(34,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
 D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(35,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(100,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
 D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(101,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(110,38): warning C4305:  'argument': truncation from 'double' to 'float'
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(325,18): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(326,19): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(362,23): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
-D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(363,23): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(102,22): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(111,38): warning C4305:  'argument': truncation from 'double' to 'float'
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(127,32): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(127,24): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(331,18): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(332,19): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(369,24): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
+D:\GAME BY SFML\GAME_SNAKE\GAME_SNAKE\Gameplay.cpp(370,24): warning C4244:  '=': conversion from 'int' to 'float', possible loss of data
   Generating code
-  5 of 600 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+  0 of 601 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GAME_SNAKE.vcxproj -> D:\GAME BY SFML\GAME_SNAKE\Release\GAME_SNAKE.exe

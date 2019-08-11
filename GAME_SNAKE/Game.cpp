@@ -45,6 +45,7 @@ void Game::Init() {
 	_Res->_Image.LoadTexture("res/image/Gameover.jpg", "Gameover");
 	_Res->_Image.LoadTexture("res/image/Mainmenu.jpg", "Menuback");
 	_Res->_Image.LoadTexture("res/image/Over.png", "Over");
+	_Res->_Image.LoadTexture("res/image/lawn.png", "lawn");
 	_Res->_Image.LoadSoundBuffer("res/audio/bite.ogg", "applebite");
 	_Res->_Image.LoadSoundBuffer("res/audio/theme.ogg", "theme");
 	_Res->_Image.LoadFont("res/font/arial.ttf", "arial");
@@ -93,7 +94,7 @@ void Game::Run() {
 			if (_Clock.getElapsedTime().asSeconds() > delay) {
 				_Res->_StateM.GetCurrState()->Update();
 				_Res->_StateM.GetCurrState()->Draw();
-				delay = delay - 0.000002;
+				delay = delay - 0.0000025;
 				_Clock.restart();
 			}
 		}
@@ -103,12 +104,12 @@ void Game::Run() {
 			case -1:
 				_Res->_window.close();
 			case 2:
-				delay = 0.1;
+				delay = 0.15;
 				_Res->_StateM.RemoveState();
 				break;
 			case 3:
 				_Res->_StateM.GetCurrState()->signal = 0;
-				delay = 0.1;
+				delay = 0.15;
 				_Res->_StateM.AddState(std::make_unique<Gameplay>(_Res));
 				break;
 			case 4:

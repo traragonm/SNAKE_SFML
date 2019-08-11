@@ -35,6 +35,7 @@ private:
 	sf::Sprite _SnakeTrunkRU;
 	sf::Sprite _SnakeTrunkRD;
 	sf::Sprite _Replay;
+	sf::Sprite _Lawn;
 	sf::Sprite _OverFrame;
 	sf::Sprite _Back;
 	sf::Sprite _Gameover;
@@ -53,5 +54,6 @@ private:
 	void HandleGame(sf::Event event);
 	void HandleOver(sf::Event event);
 	void restart();
+	bool check();
 };
 
